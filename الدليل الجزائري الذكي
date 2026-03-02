@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دليل التخطيط المالي الجزائري</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        @font-face {
+            font-family: 'Arabic';
+            src: local('Arial'), local('Times New Roman');
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-wrapper {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 100%;
+        }
+
+        .content-area {
+            background: #f8f9fa;
+        }
+
+        .chapter-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border-right: 4px solid transparent;
+        }
+
+        .chapter-card:hover {
+            transform: translateX(-8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-right-color: #667eea;
+        }
+
+        .chapter-card.active {
+            background: #fff;
+            border-right-color: #667eea;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: right;
+        }
+
+        .main-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .section-heading {
+            color: #667eea;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: #f0f4ff;
+            border-right: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .principle-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .strategy-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-right: 3px solid #764ba2;
+        }
+
+        .progress-indicator {
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+        }
+
+        .emoji-icon {
+            font-size: 2em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .note-section {
+            background: #fff3cd;
+            border-right: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+        }
+
+        .data-table th {
+            background: #f0f4ff;
+            color: #667eea;
+            padding: 15px;
+            text-align: right;
+            font-weight: 700;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: right;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-box {
+            animation: slideIn 0.4s ease;
+        }
+
+        .sidebar-nav {
+            max-height: calc(100% - 100px);
+            overflow-y: auto;
+        }
+
+        .chapter-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+    </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full m-0">
+  <div class="app-wrapper h-full flex flex-col"><!-- Header -->
+   <div class="header-section">
+    <h1 class="main-title" id="appTitle">دليل التخطيط المالي الجزائري 💰</h1>
+    <p class="subtitle">تعلم كيف تتحكم في فلوسك وتبني مستقبلك المالي</p>
+   </div><!-- Main Content -->
+   <div class="flex-1 flex gap-0 overflow-hidden"><!-- Sidebar Navigation -->
+    <div class="w-1/4 bg-white border-l border-gray-200 sidebar-nav">
+     <div class="p-6 space-y-2" id="chapterList"><!-- Chapters will be populated here -->
+     </div>
+    </div><!-- Chapter Content -->
+    <div class="flex-1 content-area overflow-y-auto">
+     <div class="max-w-4xl mx-auto p-8" id="chapterContent"><!-- Content will be populated here -->
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+        let currentChapter = 0;
+        let allChapters = [];
+
+        const chapters = [
+            {
+                id: 'intro',
+                title: 'المقدمة',
+                emoji: '👋',
+                content: `
+                    <div class="content-box">
+                        <h2 class="section-heading">🤝 السلام عليكم ورحمة الله وبركاته</h2>
+                        <p>أهلاً وسهلاً بك في دليلك الشامل للتخطيط المالي الذكي!</p>
+                        <div class="highlight-box">
+                            <p><strong>هذا الدليل مصمم خصيصاً للجزائريين</strong> ليساعدك على:</p>
+                            <ul style="margin: 15px 0; padding-right: 20px;">
+                                <li>✅ فهم أين تذهب فلوسك بالضبط</li>
+                                <li>✅ السيطرة على المصاريف دون حرمان</li>
+                                <li>✅ بناء مستقبل مالي آمن ومستقر</li>
+                                <li>✅ تحقيق أحلامك المالية خطوة بخطوة</li>
+                            </ul>
+                        </div>
+                        <p>الدليل يحتوي على فصلين:</p>
+                        <ul style="margin: 15px 0; padding-right: 20px;">
+                            <li><strong>الفصل الأول:</strong> الجردة - معرفة وضعك المالي الحقيقي</li>
+                            <li><strong>الفصل الثاني:</strong> التحكم والتخطيط - استراتيجيات عملية وواقعية</li>
+                        </ul>
+                        <div class="note-section">
+                            <strong>💡 نصيحة ذهبية:</strong> اقرأ بهدوء، خذ وقتك، وطبق ما تتعلمه تدريجياً. المال لا ينظر إلى السرعة، بل إلى الاستمرارية.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'chapter1',
+                title: 'الفصل الأول: الجردة 📊',
+                emoji: '📊',
+                content: `
+                    <div class="content-box">
+                        <h2 class="section-heading">الجردة: معرفة وضعك المالي الحقيقي</h2>
+                        <p>قبل أي تخطيط، يجب أن نقف وقفة صراحة مع أنفسنا ونسأل:</p>
+                        <div class="highlight-box">
+                            <p><strong>أين تذهب فلوسي؟</strong></p>
+                            <p>كل واحد في آخر الشهر يحس أن الفلوس "تطير". يحس أنو صرف وصرف ومع ذلك ما كملش حواليه والو.</p>
+                        </div>
+                        
+                        <h3 style="color: #667eea; font-size: 1.3em; margin-top: 25px;">المصاريف الرئيسية في البيت الجزائري:</h3>
+                        
+                        <div class="strategy-item">
+                            <div class="emoji-icon">🔴</div>
+                            <strong>المواد الغذائية والاستهلاكية</strong>
+                            <p style="margin-top: 10px;">هي الفاتورة الكبرى في كل بيت جزائري. لكن المشكلة ليست في الأكل نفسه، بل في <strong>كيفية شرائه واستهلاكه</strong>.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <div class="emoji-icon">🛑</div>
+                            <strong>تكاليف السكن والخدمات</strong>
+                            <p style="margin-top: 10px;">الإيجار، الكهرباء، الماء، الغاز، الإنترنت... هذه مصاريف ثابتة تقريباً.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <div class="emoji-icon">🚗</div>
+                            <strong>المحروقات والنقل</strong>
+                            <p style="margin-top: 10px;">للسيارة أو النقل العمومي. تكاليف يومية تجمع إلى أرقام كبيرة في آخر الشهر.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <div class="emoji-icon">🎉</div>
+                            <strong>المصاريف الموسمية والطارئة</strong>
+                            <p style="margin-top: 10px;">الأعراس، المناسبات، رمضان، العيد، الدخول المدرسي. تأتي بدون موعد في ذهننا لكنها في الحقيقة لها مواعيد معروفة.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <div class="emoji-icon">💧</div>
+                            <strong>التسريبات الصغيرة (الأخطر!)</strong>
+                            <p style="margin-top: 10px;">القهوة من المقهى، شحن الرصيد، السجائر، المشتريات العفوية... أشياء صغيرة لكنها تجمع لأرقام ضخمة.</p>
+                        </div>
+
+                        <div class="highlight-box" style="background: #fff3cd; border-right-color: #ffc107; margin-top: 25px;">
+                            <strong>💡 التمرين العملي:</strong>
+                            <p>خذ كراس أو فتح تطبيق، وسجل كل دينار تصرفه لمدة أسبوع كامل - حتى الـ 10 دج. في نهاية الأسبوع، اجمع الكل وستندهش من الأرقام!</p>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'chapter2-section1',
+                title: 'الفصل الثاني: المبادئ الذهبية 🏆',
+                emoji: '🏆',
+                content: `
+                    <div class="content-box">
+                        <h2 class="section-heading">المبادئ الذهبية الخمسة</h2>
+                        <p>قبل ما ندخل في التفاصيل، لازم نتفق على خمسة مبادئ أساسية، هي بمثابة "الدستور" المالي:</p>
+
+                        <div style="margin-top: 30px;">
+                            <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+                                <div class="principle-number">1</div>
+                                <div style="flex: 1;">
+                                    <h4 style="color: #667eea; font-size: 1.2em; margin-top: 0;">الميزانية مش حرمان، الميزانية حرية</h4>
+                                    <p>ناس كثيرة تسمع كلمة "ميزانية" وتحس بالاختناق. لكن الحقيقة عكس ذلك! الميزانية هي خريطة الطريق اللي تخليك أنت اللي تتحكم في الفلوس، مش الفلوس اللي تتحكم فيك.</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+                                <div class="principle-number">2</div>
+                                <div style="flex: 1;">
+                                    <h4 style="color: #667eea; font-size: 1.2em; margin-top: 0;">التدرج هو السر</h4>
+                                    <p>ما تطلبش من روحك المستحيل. ابدأ صغيراً: وفر 5% هذا الشهر، 7% الشهر الجاي، 10% بعدو. التدرج يمنع الإحباط والفشل.</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+                                <div class="principle-number">3</div>
+                                <div style="flex: 1;">
+                                    <h4 style="color: #667eea; font-size: 1.2em; margin-top: 0;">اعرف نفسك</h4>
+                                    <p>في ناس تحب الخوتة والمقاهي، وناس تحب التسوق. اعرف نقاط ضعفك المالية، وركز عليها. ما تحاول تكون نسخة من غيرك.</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+                                <div class="principle-number">4</div>
+                                <div style="flex: 1;">
+                                    <h4 style="color: #667eea; font-size: 1.2em; margin-top: 0;">راجع خطتك كل شهر</h4>
+                                    <p>في نهاية كل شهر، اجلس ساعة واحدة وراجع: واش اللي نجح؟ واش اللي فشل؟ وين زاد الصرف؟ المراجعة المنتظمة هي سر التحسن.</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 20px;">
+                                <div class="principle-number">5</div>
+                                <div style="flex: 1;">
+                                    <h4 style="color: #667eea; font-size: 1.2em; margin-top: 0;">كافئ نفسك</h4>
+                                    <p>إذا حققت هدفك هذا الشهر، كافئ نفسك بشيء بسيط تحبه. هذا يخلّي العملية ممتعة ويحفزك على الاستمرار.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="note-section">
+                            <strong>🎯 الخلاصة:</strong> هذه المبادئ هي أساس نجاحك. التزم بها وستشوف الفرق.
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 'chapter2-section2',
+                title: 'استراتيجيات عملية 🎯',
+                emoji: '🎯',
+                content: `
+                    <div class="content-box">
+                        <h2 class="section-heading">الاستراتيجيات العملية</h2>
+
+                        <h3 style="color: #667eea; margin-top: 20px; font-size: 1.2em;">📌 المواد الغذائية (أكبر فاتورة في البيت)</h3>
+                        
+                        <div class="strategy-item">
+                            <strong>✓ القاعدة الذهبية – القائمة والميزانية</strong>
+                            <p style="margin-top: 10px;">قبل ما تروح للسوق، اكتب قائمة المشتريات الضرورية. قدّر ثمنها، خذ معك مبلغ محدد والتزم به.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <strong>✓ أكل قبل ما تمشي للسوق</strong>
+                            <p style="margin-top: 10px;">لا تروح للسوق وأنت جيعان! الجوع يخليك تشتري كل ما تقع عليه عينك.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <strong>✓ سوق الجملة والشراء الجماعي</strong>
+                            <p style="margin-top: 10px;">اشتر المواد الجافة من سوق الجملة. الفرق في السعر يصل لـ 30%. اتفق مع الجيران: كل واحد يشتري كمية كبيرة ويقسموها.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <strong>✓ مواسم الخضر</strong>
+                            <p style="margin-top: 10px;">الطماطم في الصيف رخيصة (50 دج)، في الشتاء غالية (200 دج). تعلم المواسم، اشتر موسمي، وفّر كتير.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <strong>✓ وصفات البقايا</strong>
+                            <p style="margin-top: 10px;">ما ترميش الأكل! البقايا + خيالك = وجبات لذيذة جديدة. في قنوات يوتيوب جزائرية تعلمك كيفاش.</p>
+                        </div>
+
+                        <h3 style="color: #667eea; margin-top: 30px; font-size: 1.2em;">🚗 المحروقات والنقل</h3>
+                        
+                        <div class="strategy-item">
+                            <strong>✓ دمج الشغلات</strong>
+                            <p style="margin-top: 10px;">بدل ما تخرج 3 مرات، خطط واجمع كل شغلاتك في خروج واحد. وفّر البنزين والوقت.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <strong>✓ النقل العمومي</strong>
+                            <p style="margin-top: 10px;">مرة في الأسبوع على الأقل، استعمل الميترو أو الباص. وفّر البنزين، وارتاح بالك من السياقة.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <strong>✓ الصيانة الدورية</strong>
+                            <p style="margin-top: 10px;">تغيير الزيت في الوقت المحدد، تنظيف الفلتر... كلها تخفض استهلاك البنزين وتمنع الأعطال الكبيرة.</p>
+                        </div>
+
+                        <h3 style="color: #667eea; margin-top: 30px; font-size: 1.2em;">🎉 المناسبات والموسميات</h3>
+                        
+                        <div class="strategy-item">
+                            <strong>✓ أنشئ "صندوق المناسبات"</strong>
+                            <p style="margin-top: 10px;">افتح حساباً جانبياً وحول له 2000 دج كل شهر. لما يجي العرس أو العيد، تكون عندك السيولة جاهزة.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <strong>✓ التسوق الذكي</strong>
+                            <p style="margin-top: 10px;">ملابس العيد: اشترها في التخفيضات (الصولد) بعد العيد الجاي. الأواني والهدايا: اشترها في الأوقات العادية.</p>
+                        </div>
+
+                        <h3 style="color: #667eea; margin-top: 30px; font-size: 1.2em;">💧 التسريبات الصغيرة (أخطر وأسهل نقطة)</h3>
+                        
+                        <div class="strategy-item">
+                            <strong>✓ قهوتك في البيت</strong>
+                            <p style="margin-top: 10px;">كيس القهوة (200 دج) يعطيك 30 فنجان. في المقهى، 30 فنجان يكلفوك 900 دج. احسب الفرق!</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <strong>✓ شحن الرصيد بذكاء</strong>
+                            <p style="margin-top: 10px;">بدل شحن يومي، اشترك في عرض أنترنات شهري. هذا يوفر عليك ما يقارب 1000 دج.</p>
+                        </div>
+
+                        <div class="strategy-item">
+                            <strong>✓ قاعدة الـ 24 ساعة</strong>
+                          
